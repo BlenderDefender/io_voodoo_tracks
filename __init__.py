@@ -95,6 +95,10 @@ class OT_IO_ImportVoodooTrack(Operator, ImportHelper):
   bpy.ops.view3d.object_as_camera()
 
 
+#------make Camera active--------------
+  bpy.data.objects['voodoo_render_cam'].select_set(True)
+  bpy.ops.view3d.object_as_camera()
+
   return {'FINISHED'}
 
 #-----------------------------------------------------------------
