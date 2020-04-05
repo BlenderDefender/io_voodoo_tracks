@@ -22,7 +22,7 @@
 bl_info = {
     "name": "Import Voodoo Camera Tracks",
     "author": "Blender Defender",
-    "version": (1, 0, 2),
+    "version": (1, 0, 3),
     "blender": (2, 82, 0),
     "location": "View3D > Object > Import > Open Voodo Camera Track",
     "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!",
@@ -88,6 +88,12 @@ class OT_IO_ImportVoodooTrack(Operator, ImportHelper):
 
 #------return to 3D View--------------- 
   bpy.context.area.ui_type = 'VIEW_3D'
+	
+#------make Camera active--------------
+  obj = bpy.context.window.scene.objects["voodoo_render_cam"]
+  bpy.context.view_layer.objects.active = obj
+  bpy.ops.view3d.object_as_camera()
+
 
 #------make Camera active--------------
   bpy.data.objects['voodoo_render_cam'].select_set(True)
