@@ -186,6 +186,7 @@ classes = (
 )
 
 
+
 def register():
 	# addon updater code and configurations
 	# in case of broken version, try to register the updater first
