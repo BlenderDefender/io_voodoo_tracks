@@ -22,8 +22,8 @@
 bl_info = {
     "name": "Import Voodoo Camera Tracks",
     "author": "Blender Defender",
-    "version": (1, 0, 3),
-    "blender": (2, 82, 0),
+    "version": (1, 0, 4),
+    "blender": (2, 83, 0),
     "location": "View3D > Object > Import > Open Voodo Camera Track",
     "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!",
     "warning": "",
@@ -45,9 +45,9 @@ from . import addon_updater_ops
 # Main Operator, opening, editing and executing the Voodoo Script
 #-----------------------------------------------------------------
 
-class OT_IO_ImportVoodooTrack(Operator, ImportHelper):
+class IO_VOODOO_TRACKS_OT_import_voodoo_track(Operator, ImportHelper):
  """Import Voodoo Camera Tracker Script (for Blender 2.5, will be automaticly converted)"""
- bl_idname = "open.voodoo_track"
+ bl_idname = "import.voodoo_track"
  bl_label = "Open Voodo Camera Track (.py)"
  
  def execute(self, context):
@@ -105,20 +105,20 @@ class OT_IO_ImportVoodooTrack(Operator, ImportHelper):
 # Import Menu
 #-----------------------------------------------------------------
 
-class Voodoo_Tracking_Menu(bpy.types.Menu):
-    bl_idname = 'menu.import_voodoo'
+class IO_VOODOO_TRACKS_MT_voodoo_tracker_menu(bpy.types.Menu):
+    bl_idname = 'menu.voodoo_track'
     bl_label = 'Import'
 
     def draw(self, context):
         layout = self.layout
-        layout.operator(OT_IO_ImportVoodooTrack.bl_idname, icon = 'CON_CAMERASOLVER')
+        layout.operator(IO_VOODOO_TRACKS_OT_import_voodoo_track.bl_idname, icon = 'CON_CAMERASOLVER')
 #-----------------------------------------------------------------
 
 def menu_func(self, context):
-    self.layout.menu(Voodoo_Tracking_Menu.bl_idname)
+    self.layout.menu(IO_VOODOO_TRACKS_MT_voodoo_tracker_menu.bl_idname)
 
 
-class DemoPreferences(bpy.types.AddonPreferences):
+class IO_VOODOO_TRACKS_PREF_addon_preferences(bpy.types.AddonPreferences):
 	bl_idname = __package__
 
 	# addon updater preferences
@@ -179,11 +179,12 @@ class DemoPreferences(bpy.types.AddonPreferences):
 
 
 classes = (
-	DemoPreferences,
-	OT_IO_ImportVoodooTrack,
-	Voodoo_Tracking_Menu,
+	IO_VOODOO_TRACKS_PREF_addon_preferences,
+	IO_VOODOO_TRACKS_OT_import_voodoo_track,
+	IO_VOODOO_TRACKS_MT_voodoo_tracker_menu,
 	
 )
+
 
 
 def register():
