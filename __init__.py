@@ -22,11 +22,11 @@
 bl_info = {
     "name": "Import Voodoo Camera Tracks",
     "author": "Blender Defender",
-    "version": (1, 0, 4),
+    "version": (1, 0, 5),
     "blender": (2, 83, 0),
     "location": "View3D > Object > Import > Open Voodo Camera Track",
     "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!",
-    "warning": "",
+    "warning": "Checkout Gumroad for other Addons and more...",
     "wiki_url": "https://github.com/BlenderDefender/io_voodoo_tracks",
     "tracker_url": "https://github.com/BlenderDefender/io_voodoo_tracks/issues",
     "category": "Import-Export"}
@@ -105,7 +105,7 @@ class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
 class IOVOODOOTRACKS_OT_CheckGumroad(bpy.types.Operator):
     """Checkout Gumroad for more cool Addons and Blender Files"""
     bl_idname = "voodoo_track.check_gumroad"
-    bl_label = "Checkout Gumroad for extension packs and more..."
+    bl_label = "Checkout Gumroad for other Addons and more..."
     bl_options = {'REGISTER'}
 
     
