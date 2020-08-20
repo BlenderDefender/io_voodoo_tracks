@@ -52,7 +52,7 @@ except Exception as e:
 # Must declare this before classes are loaded
 # otherwise the bl_idname's will not match and have errors.
 # Must be all lowercase and no spaces
-updater.addon = "addon_updater_demo_test"
+updater.addon = "update_voodo_tracks"
 
 
 # -----------------------------------------------------------------------------
@@ -1255,10 +1255,10 @@ def register(bl_info):
 		return
 	updater.clear_state() # clear internal vars, avoids reloading oddities
 
-	# confirm your updater "engine" (Github is default if not specified)
+#	confirm your updater "engine" (Choose between Github, GitLab and Bitbucket)
 	updater.engine = "Github"
-	# updater.engine = "GitLab"
-	# updater.engine = "Bitbucket"
+#	Jump to line 55 after setting updater.user, updater.repo and updater.website
+
 
 	# If using private repository, indicate the token here
 	# Must be set after assigning the engine.
@@ -1267,7 +1267,7 @@ def register(bl_info):
 	# other considerations and suggestions from a security standpoint
 	updater.private_token = None # "tokenstring"
 
-	# choose your own username, must match website (not needed for GitLab)
+	# choose your own username(all lowercase), must match website (not needed for GitLab)
 	updater.user = "blenderdefender"
 
 	# choose your own repository, must match git name

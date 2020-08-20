@@ -40,14 +40,15 @@ from bpy.types import Operator
 
 # updater ops import, all setup in this file
 from . import addon_updater_ops
+from . import addon_updater_ops
 
 #-----------------------------------------------------------------
 # Main Operator, opening, editing and executing the Voodoo Script
 #-----------------------------------------------------------------
 
-class IO_VOODOO_TRACKS_OT_import_voodoo_track(Operator, ImportHelper):
+class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
  """Import Voodoo Camera Tracker Script (for Blender 2.5, will be automaticly converted)"""
- bl_idname = "import.voodoo_track"
+ bl_idname = "voodoo_track.import"
  bl_label = "Open Voodo Camera Track (.py)"
  
  def execute(self, context):
@@ -88,7 +89,7 @@ class IO_VOODOO_TRACKS_OT_import_voodoo_track(Operator, ImportHelper):
 
 #------return to 3D View--------------- 
   bpy.context.area.ui_type = 'VIEW_3D'
-	
+    
 #------make Camera active--------------
   obj = bpy.context.window.scene.objects["voodoo_render_cam"]
   bpy.context.view_layer.objects.active = obj
@@ -101,112 +102,125 @@ class IO_VOODOO_TRACKS_OT_import_voodoo_track(Operator, ImportHelper):
 
   return {'FINISHED'}
 
+class IOVOODOOTRACKS_OT_CheckGumroad(bpy.types.Operator):
+    """Checkout Gumroad for more cool Addons and Blender Files"""
+    bl_idname = "voodoo_track.check_gumroad"
+    bl_label = "Checkout Gumroad for extension packs and more..."
+    bl_options = {'REGISTER'}
+
+    
+    def execute(self, context):
+        bpy.ops.wm.url_open(url="https://gumroad.com/blenderdefender")
+        return {'FINISHED'}
+
+
 #-----------------------------------------------------------------
 # Import Menu
 #-----------------------------------------------------------------
 
-class IO_VOODOO_TRACKS_MT_voodoo_tracker_menu(bpy.types.Menu):
-    bl_idname = 'menu.voodoo_track'
+class IOVOODOOTRACKS_MT_voodoo_tracker_menu(bpy.types.Menu):
+    bl_idname = 'voodoo_track.menu'
     bl_label = 'Import'
 
     def draw(self, context):
         layout = self.layout
-        layout.operator(IO_VOODOO_TRACKS_OT_import_voodoo_track.bl_idname, icon = 'CON_CAMERASOLVER')
+        layout.operator(IOVOODOOTRACKS_OT_import_voodoo_track.bl_idname, icon = 'CON_CAMERASOLVER')
 #-----------------------------------------------------------------
 
 def menu_func(self, context):
-    self.layout.menu(IO_VOODOO_TRACKS_MT_voodoo_tracker_menu.bl_idname)
+    self.layout.menu(IOVOODOOTRACKS_MT_voodoo_tracker_menu.bl_idname)
 
 
-class IO_VOODOO_TRACKS_PREF_addon_preferences(bpy.types.AddonPreferences):
-	bl_idname = __package__
 
-	# addon updater preferences
 
-	auto_check_update = bpy.props.BoolProperty(
-		name="Auto-check for Update",
-		description="If enabled, auto-check for updates using an interval",
-		default=False,
-		)
-	updater_intrval_months = bpy.props.IntProperty(
-		name='Months',
-		description="Number of months between checking for updates",
-		default=0,
-		min=0
-		)
-	updater_intrval_days = bpy.props.IntProperty(
-		name='Days',
-		description="Number of days between checking for updates",
-		default=7,
-		min=0,
-		max=31
-		)
-	updater_intrval_hours = bpy.props.IntProperty(
-		name='Hours',
-		description="Number of hours between checking for updates",
-		default=0,
-		min=0,
-		max=23
-		)
-	updater_intrval_minutes = bpy.props.IntProperty(
-		name='Minutes',
-		description="Number of minutes between checking for updates",
-		default=0,
-		min=0,
-		max=59
-		)
+class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
+    bl_idname = __package__
 
-	def draw(self, context):
-		layout = self.layout
-		# col = layout.column() # works best if a column, or even just self.layout
-		mainrow = layout.row()
-		col = mainrow.column()
+    # addon updater preferences
 
-		# updater draw function
-		# could also pass in col as third arg
-		addon_updater_ops.update_settings_ui(self, context)
+    auto_check_update = bpy.props.BoolProperty(
+        name="Auto-check for Update",
+        description="If enabled, auto-check for updates using an interval",
+        default=True,
+        )
+    updater_intrval_months = bpy.props.IntProperty(
+        name='Months',
+        description="Number of months between checking for updates",
+        default=0,
+        min=0
+        )
+    updater_intrval_days = bpy.props.IntProperty(
+        name='Days',
+        description="Number of days between checking for updates",
+        default=7,
+        min=0,
+        max=31
+        )
+    updater_intrval_hours = bpy.props.IntProperty(
+        name='Hours',
+        description="Number of hours between checking for updates",
+        default=0,
+        min=0,
+        max=23
+        )
+    updater_intrval_minutes = bpy.props.IntProperty(
+        name='Minutes',
+        description="Number of minutes between checking for updates",
+        default=0,
+        min=0,
+        max=59
+        )
 
-		# Alternate draw function, which is more condensed and can be
-		# placed within an existing draw function. Only contains:
-		#   1) check for update/update now buttons
-		#   2) toggle for auto-check (interval will be equal to what is set above)
-		# addon_updater_ops.update_settings_ui_condensed(self, context, col)
+    def draw(self, context):
+        layout = self.layout
+        # col = layout.column() # works best if a column, or even just self.layout
+        mainrow = layout.row()
+        col = mainrow.column()
+        
+        layout.operator("voodoo_track.check_gumroad", icon='FUND')
 
-		# Adding another column to help show the above condensed ui as one column
-		# col = mainrow.column()
-		# col.scale_y = 2
-		# col.operator("wm.url_open","Open webpage ").url=addon_updater_ops.updater.website
+        # updater draw function
+        # could also pass in col as third arg
+        addon_updater_ops.update_settings_ui(self, context)
+
+        # Alternate draw function, which is more condensed and can be
+        # placed within an existing draw function. Only contains:
+        #   1) check for update/update now buttons
+        #   2) toggle for auto-check (interval will be equal to what is set above)
+        # addon_updater_ops.update_settings_ui_condensed(self, context, col)
+
+        # Adding another column to help show the above condensed ui as one column
+        # col = mainrow.column()
+        # col.scale_y = 2
+        # col.operator("wm.url_open","Open webpage ").url=addon_updater_ops.updater.website
 
 
 classes = (
-	IO_VOODOO_TRACKS_PREF_addon_preferences,
-	IO_VOODOO_TRACKS_OT_import_voodoo_track,
-	IO_VOODOO_TRACKS_MT_voodoo_tracker_menu,
-	
+     IOVOODOOTRACKS_OT_import_voodoo_track,
+     IOVOODOOTRACKS_MT_voodoo_tracker_menu,
+     IOVOODOOTRACKS_OT_CheckGumroad,
+     IOVOODOOTRACKS_APT_addon_preferences
 )
 
-
-
 def register():
-	# addon updater code and configurations
-	# in case of broken version, try to register the updater first
-	# so that users can revert back to a working version
-	addon_updater_ops.register(bl_info)
+    # addon updater code and configurations
+    # in case of broken version, try to register the updater first
+    # so that users can revert back to a working version
+    addon_updater_ops.register(bl_info)
 
-	bpy.types.VIEW3D_MT_object.append(menu_func)
-
-	# register the example panel, to show updater buttons
-	for cls in classes:
-		addon_updater_ops.make_annotations(cls) # to avoid blender 2.8 warnings
-		bpy.utils.register_class(cls)
+    bpy.types.VIEW3D_MT_object.append(menu_func)
+    # register the example panel, to show updater buttons
+    for cls in classes:
+        addon_updater_ops.make_annotations(cls) # to avoid blender 2.8 warnings
+        bpy.utils.register_class(cls)
 
 
 def unregister():
-	# addon updater unregister
-	addon_updater_ops.unregister()
+    # addon updater unregister
+    addon_updater_ops.unregister()
+    bpy.types.VIEW3D_MT_object.remove(menu_func)
 
-	bpy.types.VIEW3D_MT_object.remove(menu_func)
+    # register the example panel, to show updater buttons
+    for cls in reversed(classes):
+        bpy.utils.unregister_class(cls)
 
-	# register the example panel, to show updater buttons
-	for cls in reversed(classes):
-		bpy.utils.unregister_class(cls)
