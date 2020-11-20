@@ -14,7 +14,7 @@ def decode(path, decoding):
     if a[0] == "BlenderDefender":
         return a
     else:
-        raise "File is invalid."
+        raise
 
 
 def create_db():
