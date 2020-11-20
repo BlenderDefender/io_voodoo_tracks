@@ -38,7 +38,7 @@ import subprocess
 import fileinput
 
 from . import addon_updater_ops
-
+from .functions.blenderdefender_functions import f_d_version
 
 class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
     bl_idname = __package__
@@ -85,7 +85,13 @@ class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
         col = mainrow.column()
 
         layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
-
+        if f_d_version() == "free":
+            layout.label(text="IO Voodoo Tracks - You are using the free version.")
+            layout.label(text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
+            layout.operator("voodoo_track.upgrade")
+        elif f_d_version() == "donation":
+            layout.label(text="IO Voodoo Tracks - You are using the donation version. Thank you :)")
+            layout.operator("wm.url_open", text="Get discount code for cool Blender Products").url="https://linktr.ee/5akW_ZE56dHsjaA"
         # could also pass in col as third arg
         addon_updater_ops.update_settings_ui(self, context)
 

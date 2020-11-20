@@ -1,0 +1,3 @@
+*.pyc
+__pychache__/
+io_voodoo_tracks_updater/

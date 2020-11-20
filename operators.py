@@ -38,6 +38,9 @@ from .functions.FileFunctions import (
     run_script
 )
 
+from .functions.blenderdefender_functions import upgrade
+
+
 # -----------------------------------------------------------------
 # Main Operator, opening, editing and executing the Voodoo Script
 # -----------------------------------------------------------------
@@ -65,9 +68,34 @@ class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
 
         return {'FINISHED'}
 
+class IOVOODOOTRACKS_OT_upgrade(Operator):
+    """Upgrade from free to donation version"""
+    bl_idname = "voodoo_track.upgrade"
+    bl_label = "Upgrade!"
+
+    password : StringProperty(name="Enter Password. Don't have one?")
+
+    def execute(self, context):
+        """Upgrade to donation version"""
+        from .functions.dict.dict import decoding
+
+        self.report({'INFO'}, upgrade('functions/data.blenderdefender', decoding, self.password))
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        return context.window_manager.invoke_props_dialog(self)
+
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "password")
+        layout.label(text="Please enter your passcode. Don't have one?")
+        layout.operator("wm.url_open", text="Get one!").url="https://gumroad.com/l/ImportVoodooCameraTracks"
+        # return {'FINISHED'}
+
 
 classes = (
     IOVOODOOTRACKS_OT_import_voodoo_track,
+    IOVOODOOTRACKS_OT_upgrade
 )
 
 
