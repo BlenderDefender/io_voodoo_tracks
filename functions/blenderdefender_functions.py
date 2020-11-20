@@ -14,7 +14,7 @@ def decode(path, decoding):
     if a[0] == "BlenderDefender":
         return a
     else:
-        return "File is invalid"
+        raise "File is invalid."
 
 
 def create_db():
@@ -27,7 +27,7 @@ def update_db():
     file = open("functions/IO.db", "a")
     file.write(" dn8To&9gA")
     file.close()
-    return "Update DB"
+    return "Upgrade to donation version."
 
 
 def upgrade(path, decoding, password):
@@ -43,10 +43,10 @@ def upgrade(path, decoding, password):
                 return "Password invalid. If you think this is a misstake, please report a bug."
         else:
             file.close()
-            return "Database files corrupted."
+            return "Database file corrupted. Please reinstall the addon."
         file.close()
     except:
-        return "Database file corrupted."
+        return "Database file corrupted. Please reinstall the addon."
 
 
 def f_d_version():

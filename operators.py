@@ -90,7 +90,9 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
         layout.prop(self, "password")
         layout.label(text="Please enter your passcode. Don't have one?")
         layout.operator("wm.url_open", text="Get one!").url="https://gumroad.com/l/ImportVoodooCameraTracks"
-        # return {'FINISHED'}
+        layout.label(text="Didn't receive Email with passcode?")
+        layout.label(text="Please open an issue on GitHub.")
+        layout.label(text="I will help as soon as possible!")
 
 
 classes = (
