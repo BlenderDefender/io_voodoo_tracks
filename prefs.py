@@ -92,6 +92,11 @@ class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
         elif f_d_version() == "donation":
             layout.label(text="IO Voodoo Tracks - You are using the donation version. Thank you :)")
             layout.operator("wm.url_open", text="Get discount code for cool Blender Products").url="https://linktr.ee/5akW_ZE56dHsjaA"
+        elif f_d_version() == "database_file_corrupted":
+            layout.label(text="IO Voodoo Tracks - Databasefile corrupted! Please delete it and refresh")
+            layout.label(text="the addons page. And please, stop messing around with .db files. Thanks :)")
+            layout.operator("voodoo_track.upgrade", text="Upgrade to donation version.")
+        
         # could also pass in col as third arg
         addon_updater_ops.update_settings_ui(self, context)
 

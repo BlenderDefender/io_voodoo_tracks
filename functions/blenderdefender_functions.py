@@ -14,26 +14,40 @@ def decode(path, decoding):
     if a[0] == "BlenderDefender":
         return a
     else:
-        raise
+        return "ERROR"
 
 
-def create_db():
-    file = open("functions/IO.db", "w+")
-    file.write(decode('functions/data.blenderdefender', decoding)[1])
-    file.close
+def setup_addons_data():
+    import os
+    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks")
+    if not os.path.isdir(path):
+        os.makedirs(path)
+
+    if "IO.db" in os.listdir(path):
+        return path
+    else:
+        file = open(os.path.join(path, "IO.db"), "w+")
+        file.write(decode('functions/data.blenderdefender', decoding)[1])
+        file.close()
+        return path
 
 
 def update_db():
-    file = open("functions/IO.db", "a")
+    import os
+    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
+
+    file = open(path, "a")
     file.write(" dn8To&9gA")
     file.close()
     return "Upgrade to donation version."
 
 
 def upgrade(path, decoding, password):
+    import os
     password_list = decode(path, decoding)
+    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
     try:
-        file = open("functions/IO.db", "r")
+        file = open(path, "r")
         if password_list[1].split("=")[0] == file.read().split("=")[0]:
             if password in password_list:
                 file.close()
@@ -50,12 +64,18 @@ def upgrade(path, decoding, password):
 
 
 def f_d_version():
-    file = open("functions/IO.db", "r")
+    import os
+    path = os.path.join(setup_addons_data(), "IO.db")
+
+    file = open(path, "r")
     c = file.read()
     c = c.split(" ")
-    if len(c) > 1:
-        file.close()
-        return "donation"
-    else:
+    if len(c) == 1:
         file.close()
         return "free"
+    elif len(c) == 2:
+        file.close()
+        return "donation"
+    elif len(c) > 2:
+        file.close()
+        return "database_file_corrupted"

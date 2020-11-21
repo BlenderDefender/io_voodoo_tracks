@@ -73,7 +73,7 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
     bl_idname = "voodoo_track.upgrade"
     bl_label = "Upgrade!"
 
-    password : StringProperty(name="Enter Password. Don't have one?")
+    password : StringProperty(name="")
 
     def execute(self, context):
         """Upgrade to donation version"""

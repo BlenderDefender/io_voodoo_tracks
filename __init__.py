@@ -48,18 +48,12 @@ import os
 import subprocess
 import fileinput
 
-from .functions.blenderdefender_functions import create_db
 
 def menu_func(self, context):
     self.layout.operator("voodoo_track.import", icon='CON_CAMERASOLVER')
 
 
 def register():
-    import os
-    if "IO.db" in os.listdir(os.path.join(os.path.split(os.path.abspath(__file__))[0], "functions")):
-        pass
-    else:
-        create_db()
 
     prefs.register()
     operators.register()
