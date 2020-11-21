@@ -17,7 +17,7 @@ def decode(path, decoding):
         return "ERROR"
 
 
-def setup_addons_data():
+def setup_addons_data(data):
     import os
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks")
     if not os.path.isdir(path):
@@ -27,7 +27,8 @@ def setup_addons_data():
         return path
     else:
         file = open(os.path.join(path, "IO.db"), "w+")
-        file.write(decode('functions/data.blenderdefender', decoding)[1])
+        # path2 = os.path.join(path, "data.blenderdefender")
+        file.write(data) #decode(path2, decoding))#[1])
         file.close()
         return path
 
@@ -65,7 +66,8 @@ def upgrade(path, decoding, password):
 
 def f_d_version():
     import os
-    path = os.path.join(setup_addons_data(), "IO.db")
+    data = decode(os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender"), decoding)
+    path = os.path.join(setup_addons_data(data[1]), "IO.db")
 
     file = open(path, "r")
     c = file.read()

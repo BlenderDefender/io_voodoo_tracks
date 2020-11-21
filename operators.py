@@ -78,8 +78,9 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
     def execute(self, context):
         """Upgrade to donation version"""
         from .functions.dict.dict import decoding
+        import os
 
-        self.report({'INFO'}, upgrade('functions/data.blenderdefender', decoding, self.password))
+        self.report({'INFO'}, upgrade(os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender"), decoding, self.password))
         return {'FINISHED'}
 
     def invoke(self, context, event):
