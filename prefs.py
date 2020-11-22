@@ -23,7 +23,7 @@
 bl_info = {
     "name": "Import Voodoo Camera Tracks",
     "author": "Blender Defender",
-    "version": (1, 0, 5),
+    "version": (1, 0, 6),
     "blender": (2, 83, 0),
     "location": "File > Import > Open Voodo Camera Track (.py)",
     "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!",
