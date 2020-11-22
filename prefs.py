@@ -38,7 +38,8 @@ import subprocess
 import fileinput
 
 from . import addon_updater_ops
-from .functions.blenderdefender_functions import f_d_version
+from .functions.blenderdefender_functions import check_free_donation_version
+
 
 class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
     bl_idname = __package__
@@ -82,21 +83,22 @@ class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
         layout = self.layout
         # col = layout.column() # works best if a column, or even just self.layout
         mainrow = layout.row()
-        col = mainrow.column()
+        # col = mainrow.column()
 
-        layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
-        if f_d_version() == "free":
+        if check_free_donation_version() == "free":
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
             layout.label(text="IO Voodoo Tracks - You are using the free version.")
             layout.label(text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
             layout.operator("voodoo_track.upgrade")
-        elif f_d_version() == "donation":
-            layout.label(text="IO Voodoo Tracks - You are using the donation version. Thank you :)")
+        elif check_free_donation_version() == "donation":
+            layout.label(text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='FUND')
             layout.operator("wm.url_open", text="Get discount code for cool Blender Products").url="https://linktr.ee/5akW_ZE56dHsjaA"
-        elif f_d_version() == "database_file_corrupted":
-            layout.label(text="IO Voodoo Tracks - Databasefile corrupted! Please delete it and refresh")
-            layout.label(text="the addons page. And please, stop messing around with .db files. Thanks :)")
+        elif check_free_donation_version() == "database_file_corrupted":
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.label(text="IO Voodoo Tracks - Databasefile corrupted! Please delete it.")
+            layout.label(text="And please, stop messing around with .db files. Thanks :)")
             layout.operator("voodoo_track.upgrade", text="Upgrade to donation version.")
-        
+
         # could also pass in col as third arg
         addon_updater_ops.update_settings_ui(self, context)
 

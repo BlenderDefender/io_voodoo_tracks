@@ -68,19 +68,25 @@ class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
 
         return {'FINISHED'}
 
+
 class IOVOODOOTRACKS_OT_upgrade(Operator):
     """Upgrade from free to donation version"""
     bl_idname = "voodoo_track.upgrade"
     bl_label = "Upgrade!"
 
-    password : StringProperty(name="")
+    password: StringProperty(name="")
 
     def execute(self, context):
         """Upgrade to donation version"""
         from .functions.dict.dict import decoding
         import os
 
-        self.report({'INFO'}, upgrade(os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender"), decoding, self.password))
+        self.report({'INFO'}, upgrade(os.path.join(os.path.expanduser("~"),
+                                                   "Blender Addons Data",
+                                                   "io-voodoo-tracks",
+                                                   "data.blenderdefender"),
+                                      decoding,
+                                      self.password))
         return {'FINISHED'}
 
     def invoke(self, context, event):

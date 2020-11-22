@@ -51,6 +51,7 @@ import fileinput
 from .functions.blenderdefender_functions import setup_addons_data, decode
 from .functions.dict.dict import decoding
 
+
 def menu_func(self, context):
     self.layout.operator("voodoo_track.import", icon='CON_CAMERASOLVER')
 
@@ -61,8 +62,19 @@ def register():
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks")
     if not os.path.isdir(path):
         os.makedirs(path)
-    shutil.copyfile(os.path.join(list(os.path.split(os.path.abspath(__file__)))[0], "functions", "data.blenderdefender"), os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender"))
-    data = decode(os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender"), decoding)
+    shutil.copyfile(os.path.join(list(os.path.split(os.path.abspath(__file__)))[0],
+                                 "functions",
+                                 "data.blenderdefender"),
+                    os.path.join(os.path.expanduser("~"),
+                                 "Blender Addons Data",
+                                 "io-voodoo-tracks",
+                                 "data.blenderdefender"))
+
+    data = decode(os.path.join(os.path.expanduser("~"),
+                               "Blender Addons Data",
+                               "io-voodoo-tracks",
+                               "data.blenderdefender"),
+                  decoding)
     setup_addons_data(data[1])
 
     prefs.register()

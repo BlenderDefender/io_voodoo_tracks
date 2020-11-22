@@ -1,18 +1,40 @@
+# ##### BEGIN GPL LICENSE BLOCK #####
+#
+# <Import Voodoo Camera Tracker Scripts for Version 2.5 the easy way>
+#  Copyright (C) <2020>  <Blender Defender>
+#
+#  This program is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License
+#  as published by the Free Software Foundation; either version 3
+#  of the License, or (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software Foundation,
+#  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+# ##### END GPL LICENSE BLOCK #####
+
+
 from .dict.dict import decoding
 
+
 def decode(path, decoding):
+    file = open(path, 'r')
+    decoded = ""
+    for line in file.readlines():
+        line = line.split(",")
+        for char in line:
+            decoded += decoding[char]
 
-    f = open(path, 'r')
-    a = ""
-    for line in f.readlines():
-        l = line.split(",")
-        for c in l:
-            a += decoding[c]
-
-    f.close()
-    a = a.split(" ")
-    if a[0] == "BlenderDefender":
-        return a
+    file.close()
+    decoded = decoded.split(" ")
+    if decoded[0] == "BlenderDefender":
+        return decoded
     else:
         return "ERROR"
 
@@ -27,8 +49,7 @@ def setup_addons_data(data):
         return path
     else:
         file = open(os.path.join(path, "IO.db"), "w+")
-        # path2 = os.path.join(path, "data.blenderdefender")
-        file.write(data) #decode(path2, decoding))#[1])
+        file.write(data)
         file.close()
         return path
 
@@ -58,26 +79,30 @@ def upgrade(path, decoding, password):
                 return "Password invalid. If you think this is a misstake, please report a bug."
         else:
             file.close()
-            return "Database file corrupted. Please reinstall the addon."
+            return "Database file corrupted. Checkout issue #5 for help."
         file.close()
     except:
-        return "Database file corrupted. Please reinstall the addon."
+        return "Database file corrupted. Checkout issue #5 for help."
 
 
-def f_d_version():
+def check_free_donation_version():
     import os
-    data = decode(os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender"), decoding)
+    data = decode(os.path.join(os.path.expanduser("~"),
+                               "Blender Addons Data",
+                               "io-voodoo-tracks",
+                               "data.blenderdefender"),
+                  decoding)
     path = os.path.join(setup_addons_data(data[1]), "IO.db")
 
     file = open(path, "r")
-    c = file.read()
-    c = c.split(" ")
-    if len(c) == 1:
+    content = file.read()
+    content = content.split(" ")
+    if len(content) == 1:
         file.close()
         return "free"
-    elif len(c) == 2:
+    elif len(content) == 2:
         file.close()
         return "donation"
-    elif len(c) > 2:
+    elif len(content) > 2:
         file.close()
         return "database_file_corrupted"
