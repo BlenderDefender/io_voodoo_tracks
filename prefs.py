@@ -38,7 +38,7 @@ import subprocess
 import fileinput
 
 from . import addon_updater_ops
-from .functions.blenderdefender_functions import check_free_donation_version
+from .functions.blenderdefender_functions import check_free_donation_version, url
 
 
 class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
@@ -92,7 +92,7 @@ class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
             layout.operator("voodoo_track.upgrade")
         elif check_free_donation_version() == "donation":
             layout.label(text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='FUND')
-            layout.operator("wm.url_open", text="Get discount code for cool Blender Products").url="https://linktr.ee/5akW_ZE56dHsjaA"
+            layout.operator("wm.url_open", text="Get discount code for cool Blender Products").url=url()
         elif check_free_donation_version() == "database_file_corrupted":
             layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
             layout.label(text="IO Voodoo Tracks - Databasefile corrupted! Please delete it.")
