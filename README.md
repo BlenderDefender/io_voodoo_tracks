@@ -1,5 +1,6 @@
 # io_voodoo_tracks
 Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!
+If you want to know more [watch or read this tutorial.](https://defenderblender.artstation.com/pages/voodoo-tracker-is-outdated-but-heres-how-you-can-still-use-it-in-blender)
 
 ![Open Headfile](/Screenshots/screenshot_io_voodoo_tracks_new.png?raw=true)
 
