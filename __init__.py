@@ -77,7 +77,7 @@ def register():
                   decoding)
     setup_addons_data(data[1])
 
-    prefs.register()
+    prefs.register(bl_info)
     operators.register()
 
     bpy.types.TOPBAR_MT_file_import.append(menu_func)
