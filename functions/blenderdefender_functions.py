@@ -110,5 +110,5 @@ def check_free_donation_version():
 
 def url():
     import os
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "procedural-nodes", "data.blenderdefender")
+    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender")
     return decode(path, decoding)[2]
