@@ -20,12 +20,12 @@
 # ##### END GPL LICENSE BLOCK #####
 
 bl_info = {
-    "name": "Import Voodoo Camera Tracks",
+    "name": "Import Voodoo Camera Tracks - Support Version for Blender 2.7x",
     "author": "Blender Defender",
-    "version": (1, 0, 6),
-    "blender": (2, 83, 0),
+    "version": (0, 0, 0),
+    "blender": (2, 70, 0),
     "location": "File > Import > Open Voodo Camera Track (.py)",
-    "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!",
+    "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.7x the easy way!",
     "warning": "Checkout Gumroad for other Addons and more...",
     "wiki_url": "https://github.com/BlenderDefender/io_voodoo_tracks",
     "tracker_url": "https://github.com/BlenderDefender/io_voodoo_tracks/issues",
@@ -53,7 +53,7 @@ from .functions.dict.dict import decoding
 
 
 def menu_func(self, context):
-    self.layout.operator("voodoo_track.import", icon='CON_CAMERASOLVER')
+    self.layout.operator("voodoo_track.import", icon='OUTLINER_OB_CAMERA')
 
 
 def register():
@@ -80,10 +80,10 @@ def register():
     prefs.register(bl_info)
     operators.register()
 
-    bpy.types.TOPBAR_MT_file_import.append(menu_func)
+    bpy.types.INFO_MT_file_import.append(menu_func)
 
 
 def unregister():
     prefs.unregister()
     operators.unregister()
-    bpy.types.TOPBAR_MT_file_import.remove(menu_func)
+    bpy.types.INFO_MT_file_import.remove(menu_func)

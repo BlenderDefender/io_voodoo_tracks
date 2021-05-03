@@ -61,8 +61,8 @@ class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
         run_script(filepath)
 
         # ------make Camera active--------------
-        obj = bpy.context.window.scene.objects["voodoo_render_cam"]
-        bpy.context.view_layer.objects.active = obj
+        obj = bpy.context.scene.objects["voodoo_render_cam"]
+        bpy.context.scene.objects.active = obj
 
         self.report({'INFO'}, "Successfully imported Voodoo Tracker Script! Press CRTL + 0 to switch to camera view!")
 
@@ -74,7 +74,7 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
     bl_idname = "voodoo_track.upgrade"
     bl_label = "Upgrade!"
 
-    password: StringProperty(name="")
+    password = StringProperty(name="")
 
     def execute(self, context):
         """Upgrade to donation version"""

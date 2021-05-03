@@ -27,12 +27,7 @@ import fileinput
 
 
 def replace_wrong_lines(python_script_filepath):
-    replace_texts = {"scene.objects.link(dummy)": "bpy.context.collection.objects.link(dummy)",
-                     "data.lens_unit = 'DEGREES'": "",
-                     "data.dof_distance = 0.0": "",
-                     "data.draw_size = 0.5": "",
-                     "scene.objects.link(mesh)": "bpy.context.collection.objects.link(mesh)",
-                     "scene.objects.link(vcam)": "bpy.context.collection.objects.link(vcam)"}
+    replace_texts = {"data.lens_unit = 'DEGREES'": ""}
 
     for line in fileinput.FileInput(python_script_filepath, inplace=True):
         for s in replace_texts:

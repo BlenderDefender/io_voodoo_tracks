@@ -74,15 +74,15 @@ class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
         # col = mainrow.column()
 
         if check_free_donation_version() == "free":
-            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='BORDERMOVE').url = "https://gumroad.com/blenderdefender"
             layout.label(text="IO Voodoo Tracks - You are using the free version.")
             layout.label(text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
             layout.operator("voodoo_track.upgrade")
         elif check_free_donation_version() == "donation":
-            layout.label(text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='FUND')
+            layout.label(text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='BORDERMOVE')
             layout.operator("wm.url_open", text="Get discount code for cool Blender Products").url=url()
         elif check_free_donation_version() == "database_file_corrupted":
-            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='BORDERMOVE').url = "https://gumroad.com/blenderdefender"
             layout.label(text="IO Voodoo Tracks - Databasefile corrupted! Please delete it.")
             layout.label(text="And please, stop messing around with .db files. Thanks :)")
             layout.operator("voodoo_track.upgrade", text="Upgrade to donation version.")
