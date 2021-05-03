@@ -15,5 +15,5 @@ If you want to know more [watch or read this tutorial.](https://defenderblender.
 | **OS** | **Blender** |
 | ------------- | ------------- |
 | OSX | Testing, please give feedback if it works for you. |
-| Windows | Blender 2.80+ |
+| Windows | Blender 2.7x |
 | Linux | Testing, please give feedback if it works for you. |
