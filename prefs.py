@@ -21,6 +21,10 @@
 
 
 import bpy
+from bpy.props import (
+    BoolProperty,
+    IntProperty
+)
 import os
 import subprocess
 import fileinput
@@ -34,32 +38,32 @@ class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
 
     # addon updater preferences
 
-    auto_check_update = bpy.props.BoolProperty(
+    auto_check_update: BoolProperty(
         name="Auto-check for Update",
         description="If enabled, auto-check for updates using an interval",
         default=True,
     )
-    updater_intrval_months = bpy.props.IntProperty(
+    updater_intrval_months: IntProperty(
         name='Months',
         description="Number of months between checking for updates",
         default=0,
         min=0
     )
-    updater_intrval_days = bpy.props.IntProperty(
+    updater_intrval_days: IntProperty(
         name='Days',
         description="Number of days between checking for updates",
         default=7,
         min=0,
         max=31
     )
-    updater_intrval_hours = bpy.props.IntProperty(
+    updater_intrval_hours: IntProperty(
         name='Hours',
         description="Number of hours between checking for updates",
         default=0,
         min=0,
         max=23
     )
-    updater_intrval_minutes = bpy.props.IntProperty(
+    updater_intrval_minutes: IntProperty(
         name='Minutes',
         description="Number of minutes between checking for updates",
         default=0,
@@ -74,18 +78,27 @@ class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
         # col = mainrow.column()
 
         if check_free_donation_version() == "free":
-            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
-            layout.label(text="IO Voodoo Tracks - You are using the free version.")
-            layout.label(text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
+                            icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.label(
+                text="IO Voodoo Tracks - You are using the free version.")
+            layout.label(
+                text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
             layout.operator("voodoo_track.upgrade")
         elif check_free_donation_version() == "donation":
-            layout.label(text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='FUND')
-            layout.operator("wm.url_open", text="Get discount code for cool Blender Products").url=url()
+            layout.label(
+                text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='FUND')
+            layout.operator(
+                "wm.url_open", text="Get discount code for cool Blender Products").url = url()
         elif check_free_donation_version() == "database_file_corrupted":
-            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...", icon='FUND').url = "https://gumroad.com/blenderdefender"
-            layout.label(text="IO Voodoo Tracks - Databasefile corrupted! Please delete it.")
-            layout.label(text="And please, stop messing around with .db files. Thanks :)")
-            layout.operator("voodoo_track.upgrade", text="Upgrade to donation version.")
+            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
+                            icon='FUND').url = "https://gumroad.com/blenderdefender"
+            layout.label(
+                text="IO Voodoo Tracks - Databasefile corrupted! Please delete it.")
+            layout.label(
+                text="And please, stop messing around with .db files. Thanks :)")
+            layout.operator("voodoo_track.upgrade",
+                            text="Upgrade to donation version.")
 
         # could also pass in col as third arg
         addon_updater_ops.update_settings_ui(self, context)
@@ -115,7 +128,8 @@ def register(bl_info):
 
     # register the example panel, to show updater buttons
     for cls in classes:
-        addon_updater_ops.make_annotations(cls)  # to avoid blender 2.8 warnings
+        addon_updater_ops.make_annotations(
+            cls)  # to avoid blender 2.8 warnings
         bpy.utils.register_class(cls)
 
 

@@ -19,10 +19,22 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+import bpy
+import os
+
+import fileinput
+import subprocess
+
+from . import operators
+from . import prefs
+
+from .functions.dict.dict import decoding
+from .functions.blenderdefender_functions import setup_addons_data, decode
+
 bl_info = {
     "name": "Import Voodoo Camera Tracks",
     "author": "Blender Defender",
-    "version": (1, 0, 6),
+    "version": (1, 0, 7),
     "blender": (2, 83, 0),
     "location": "File > Import > Open Voodo Camera Track (.py)",
     "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!",
@@ -30,26 +42,6 @@ bl_info = {
     "wiki_url": "https://github.com/BlenderDefender/io_voodoo_tracks",
     "tracker_url": "https://github.com/BlenderDefender/io_voodoo_tracks/issues",
     "category": "Import-Export"}
-
-if "bpy" in locals():
-    import importlib
-    # bl_class_registry.BlClassRegistry.cleanup()
-    importlib.reload(prefs)
-    importlib.reload(operators)
-
-else:
-    import bpy
-    # from . import bl_class_registry
-    from . import operators
-    from . import prefs
-
-import bpy
-import os
-import subprocess
-import fileinput
-
-from .functions.blenderdefender_functions import setup_addons_data, decode
-from .functions.dict.dict import decoding
 
 
 def menu_func(self, context):
@@ -59,7 +51,8 @@ def menu_func(self, context):
 def register():
     import os
     import shutil
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "io-voodoo-tracks")
     if not os.path.isdir(path):
         os.makedirs(path)
     shutil.copyfile(os.path.join(list(os.path.split(os.path.abspath(__file__)))[0],
