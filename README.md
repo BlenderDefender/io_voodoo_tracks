@@ -1,4 +1,4 @@
-[![Donate](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FBlenderDefender%2FBlenderDefender%2Fshields_endpoint%2FIO_VOODOO_TRACKS.json)](https://www.paypal.com/donate?hosted_button_id=5XJLJRSZW7Q9A)
+[![Donate](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FBlenderDefender%2FBlenderDefender%2Fshields_endpoint%2FIOVOODOOTRACKS.json)](https://www.paypal.com/donate?hosted_button_id=5XJLJRSZW7Q9A)
 ![GitHub](https://img.shields.io/github/license/BlenderDefender/io_voodoo_tracks?color=green&style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues/BlenderDefender/io_voodoo_tracks?style=for-the-badge)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/BlenderDefender/io_voodoo_tracks?style=for-the-badge)
