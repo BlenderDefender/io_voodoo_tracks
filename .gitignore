@@ -1,3 +1,7 @@
+# Ignore IDE settings
+.vscode/
+
+# Ignore run artifacts
 *.pyc
-__pychache__/
-io_voodoo_tracks_updater/
+__pycache__/
+*_updater/
