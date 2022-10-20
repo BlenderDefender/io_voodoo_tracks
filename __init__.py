@@ -41,6 +41,7 @@ bl_info = {
     "warning": "Checkout Gumroad for other Addons and more...",
     "doc_url": "https://github.com/BlenderDefender/io_voodoo_tracks",
     "tracker_url": "https://github.com/BlenderDefender/io_voodoo_tracks/issues",
+    "endpoint_url": "https://raw.githubusercontent.com/BlenderDefender/BlenderDefender/updater_endpoints/IOVOODOOTRACKS.json",
     "category": "Import-Export"}
 
 
