@@ -23,7 +23,7 @@
 from .dict.dict import decoding
 
 
-def decode(path, decoding):
+def decode(path: str, decoding: dict) -> list:
     file = open(path, 'r')
     decoded = ""
     for line in file.readlines():
@@ -39,7 +39,7 @@ def decode(path, decoding):
         return "ERROR"
 
 
-def setup_addons_data(data):
+def setup_addons_data(data: str) -> str:
     import os
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks")
     if not os.path.isdir(path):
@@ -54,7 +54,7 @@ def setup_addons_data(data):
         return path
 
 
-def update_db():
+def update_db() -> str:
     import os
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
 
@@ -64,7 +64,7 @@ def update_db():
     return "Upgrade to donation version."
 
 
-def upgrade(path, decoding, password):
+def upgrade(path: str, decoding: dict, password: str) -> str:
     import os
     password_list = decode(path, decoding)
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
@@ -85,7 +85,7 @@ def upgrade(path, decoding, password):
         return "Database file corrupted. Checkout issue #5 for help."
 
 
-def check_free_donation_version():
+def check_free_donation_version() -> str:
     import os
     data = decode(os.path.join(os.path.expanduser("~"),
                                "Blender Addons Data",
@@ -108,7 +108,7 @@ def check_free_donation_version():
         return "database_file_corrupted"
 
 
-def url():
+def url() -> str:
     import os
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender")
     return decode(path, decoding)[2]

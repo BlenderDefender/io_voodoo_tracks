@@ -20,6 +20,10 @@
 # ##### END GPL LICENSE BLOCK #####
 
 import bpy
+from bpy.types import (
+    Context,
+    UILayout
+)
 import os
 
 import fileinput
@@ -45,8 +49,9 @@ bl_info = {
     "category": "Import-Export"}
 
 
-def menu_func(self, context):
-    self.layout.operator("voodoo_track.import", icon='CON_CAMERASOLVER')
+def menu_func(self, context: 'Context'):
+    layout: 'UILayout' = self.layout
+    layout.operator("voodoo_track.import", icon='CON_CAMERASOLVER')
 
 
 def register():

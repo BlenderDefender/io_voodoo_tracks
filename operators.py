@@ -27,7 +27,12 @@ import fileinput
 
 from bpy.props import StringProperty, BoolProperty
 from bpy_extras.io_utils import ImportHelper
-from bpy.types import Operator
+from bpy.types import (
+    Context,
+    Event,
+    Operator,
+    UILayout
+)
 
 # updater ops import, all setup in this file
 from . import addon_updater_ops
@@ -51,7 +56,7 @@ class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
     bl_idname = "voodoo_track.import"
     bl_label = "Open Voodo Camera Track (.py)"
 
-    def execute(self, context):
+    def execute(self, context: 'Context'):
         """Convert the selected file from 2.5 to 2.8"""
 
         # ------call the File Browser-----------
@@ -76,7 +81,7 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
 
     password: StringProperty(name="")
 
-    def execute(self, context):
+    def execute(self, context: 'Context'):
         """Upgrade to donation version"""
         from .functions.dict.dict import decoding
         import os
@@ -89,11 +94,12 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
                                       self.password))
         return {'FINISHED'}
 
-    def invoke(self, context, event):
+    def invoke(self, context: 'Context', event: 'Event'):
         return context.window_manager.invoke_props_dialog(self)
 
-    def draw(self, context):
-        layout = self.layout
+    def draw(self, context: 'Context'):
+        layout: 'UILayout' = self.layout
+
         layout.prop(self, "password")
         layout.label(text="Please enter your passcode. Don't have one?")
         layout.operator("wm.url_open", text="Get one!").url="https://gumroad.com/l/ImportVoodooCameraTracks"

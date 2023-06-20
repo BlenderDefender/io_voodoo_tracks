@@ -25,6 +25,11 @@ from bpy.props import (
     BoolProperty,
     IntProperty
 )
+from bpy.types import (
+    AddonPreferences,
+    Context,
+    UILayout,
+)
 import os
 import subprocess
 import fileinput
@@ -33,7 +38,7 @@ from . import addon_updater_ops
 from .functions.blenderdefender_functions import check_free_donation_version, url
 
 
-class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
+class IOVOODOOTRACKS_APT_addon_preferences(AddonPreferences):
     bl_idname = __package__
 
     # addon updater preferences
@@ -71,8 +76,8 @@ class IOVOODOOTRACKS_APT_addon_preferences(bpy.types.AddonPreferences):
         max=59
     )
 
-    def draw(self, context):
-        layout = self.layout
+    def draw(self, context: 'Context'):
+        layout: 'UILayout' = self.layout
         # col = layout.column() # works best if a column, or even just self.layout
         mainrow = layout.row()
         # col = mainrow.column()

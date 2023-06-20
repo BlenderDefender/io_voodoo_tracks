@@ -26,7 +26,7 @@ import subprocess
 import fileinput
 
 
-def replace_wrong_lines(python_script_filepath):
+def replace_wrong_lines(python_script_filepath: str):
     replace_texts = {"scene.objects.link(dummy)": "bpy.context.collection.objects.link(dummy)",
                      "data.lens_unit = 'DEGREES'": "",
                      "data.dof_distance = 0.0": "",
