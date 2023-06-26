@@ -24,10 +24,10 @@ from bpy.types import (
     Context,
     UILayout
 )
+
 import os
 
-import fileinput
-import subprocess
+import shutil
 
 from . import operators
 from . import prefs
@@ -55,8 +55,6 @@ def menu_func(self, context: 'Context'):
 
 
 def register():
-    import os
-    import shutil
     path = os.path.join(os.path.expanduser(
         "~"), "Blender Addons Data", "io-voodoo-tracks")
     if not os.path.isdir(path):

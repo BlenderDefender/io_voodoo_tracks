@@ -19,6 +19,7 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
+import os
 
 from .dict.dict import decoding
 
@@ -40,7 +41,6 @@ def decode(path: str, decoding: dict) -> list:
 
 
 def setup_addons_data(data: str) -> str:
-    import os
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks")
     if not os.path.isdir(path):
         os.makedirs(path)
@@ -55,7 +55,6 @@ def setup_addons_data(data: str) -> str:
 
 
 def update_db() -> str:
-    import os
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
 
     file = open(path, "a")
@@ -65,7 +64,6 @@ def update_db() -> str:
 
 
 def upgrade(path: str, decoding: dict, password: str) -> str:
-    import os
     password_list = decode(path, decoding)
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
     try:
@@ -86,7 +84,6 @@ def upgrade(path: str, decoding: dict, password: str) -> str:
 
 
 def check_free_donation_version() -> str:
-    import os
     data = decode(os.path.join(os.path.expanduser("~"),
                                "Blender Addons Data",
                                "io-voodoo-tracks",
@@ -109,6 +106,5 @@ def check_free_donation_version() -> str:
 
 
 def url() -> str:
-    import os
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender")
     return decode(path, decoding)[2]

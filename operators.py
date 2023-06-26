@@ -21,29 +21,27 @@
 
 
 import bpy
-import os
-import subprocess
-import fileinput
 
-from bpy.props import StringProperty, BoolProperty
-from bpy_extras.io_utils import ImportHelper
+from bpy.props import (
+    StringProperty
+)
 from bpy.types import (
     Context,
     Event,
     Operator,
     UILayout
 )
+from bpy_extras.io_utils import ImportHelper
 
-# updater ops import, all setup in this file
-from . import addon_updater_ops
-from . import addon_updater_ops
+import os
 
+from .functions.dict.dict import decoding
+from .functions.blenderdefender_functions import upgrade
 from .functions.FileFunctions import (
     replace_wrong_lines,
     run_script
 )
 
-from .functions.blenderdefender_functions import upgrade
 
 
 # -----------------------------------------------------------------
@@ -83,8 +81,6 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
 
     def execute(self, context: 'Context'):
         """Upgrade to donation version"""
-        from .functions.dict.dict import decoding
-        import os
 
         self.report({'INFO'}, upgrade(os.path.join(os.path.expanduser("~"),
                                                    "Blender Addons Data",

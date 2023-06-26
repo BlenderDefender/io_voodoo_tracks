@@ -19,10 +19,12 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
-
 import bpy
+
 import os
+
 import subprocess
+
 import fileinput
 
 

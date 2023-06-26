@@ -30,11 +30,9 @@ from bpy.types import (
     Context,
     UILayout,
 )
-import os
-import subprocess
-import fileinput
 
 from . import addon_updater_ops
+
 from .functions.blenderdefender_functions import check_free_donation_version, url
 
 
