@@ -25,6 +25,16 @@ from .dict.dict import decoding
 
 
 def decode(path: str, decoding: dict) -> list:
+    """Decode a file that holds data required for the donation system.
+
+    Args:
+        path (str): The path to the file
+        decoding (dict): The mapping used for decoding.
+
+    Returns:
+        list: A list of decoded strings.
+    """
+
     file = open(path, 'r')
     decoded = ""
     for line in file.readlines():
@@ -41,6 +51,15 @@ def decode(path: str, decoding: dict) -> list:
 
 
 def setup_addons_data(data: str) -> str:
+    """Setup the data required for IO Voodoo Tracks.
+
+    Args:
+        data (str): The data to save to the data dir.
+
+    Returns:
+        str: The path of the data directory.
+    """
+
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks")
     if not os.path.isdir(path):
         os.makedirs(path)
@@ -55,6 +74,12 @@ def setup_addons_data(data: str) -> str:
 
 
 def update_db() -> str:
+    """Update the database file.
+
+    Returns:
+        str: Status message, if the update was successful.
+    """
+
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
 
     file = open(path, "a")
@@ -64,6 +89,17 @@ def update_db() -> str:
 
 
 def upgrade(path: str, decoding: dict, password: str) -> str:
+    """Function for upgrading to the donator version.
+
+    Args:
+        path (str): The path of the data directory.
+        decoding (dict): The mapping used for decoding
+        password (str): The passkey, that donation users get.
+
+    Returns:
+        str: Status, whether the upgrade was successful.
+    """
+
     password_list = decode(path, decoding)
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
     try:
@@ -84,6 +120,12 @@ def upgrade(path: str, decoding: dict, password: str) -> str:
 
 
 def check_free_donation_version() -> str:
+    """Check, whether the user is using the free version or the donation version.
+
+    Returns:
+        str: Status in {"free", "donation", "database_file_corrupted"}
+    """
+
     data = decode(os.path.join(os.path.expanduser("~"),
                                "Blender Addons Data",
                                "io-voodoo-tracks",
@@ -106,5 +148,11 @@ def check_free_donation_version() -> str:
 
 
 def url() -> str:
+    """Decode the URL that leads to the website that grants benefits to donation users.
+
+    Returns:
+        str: The decoded URL.
+    """
+
     path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender")
     return decode(path, decoding)[2]

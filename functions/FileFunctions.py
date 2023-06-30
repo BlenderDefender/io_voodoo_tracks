@@ -29,6 +29,12 @@ import fileinput
 
 
 def replace_wrong_lines(python_script_filepath: str):
+    """Replace the lines that lead to errors with the Voodoo Tracker script.
+
+    Args:
+        python_script_filepath (str): The path of the python script that should be updated.
+    """
+
     replace_texts = {"scene.objects.link(dummy)": "bpy.context.collection.objects.link(dummy)",
                      "data.lens_unit = 'DEGREES'": "",
                      "data.dof_distance = 0.0": "",
@@ -44,6 +50,11 @@ def replace_wrong_lines(python_script_filepath: str):
 
 
 def run_script(python_script_filepath):
+    """Run the updated IO Voodoo Tracks Python Script.
+
+    Args:
+        python_script_filepath (str): The path to the script that should be executed.
+    """
 
     subprocess.call([
         bpy.app.binary_path,
