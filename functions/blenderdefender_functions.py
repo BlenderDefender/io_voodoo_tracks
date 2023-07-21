@@ -60,7 +60,8 @@ def setup_addons_data(data: str) -> str:
         str: The path of the data directory.
     """
 
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "io-voodoo-tracks")
     if not os.path.isdir(path):
         os.makedirs(path)
 
@@ -80,7 +81,8 @@ def update_db() -> str:
         str: Status message, if the update was successful.
     """
 
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
 
     file = open(path, "a")
     file.write(" dn8To&9gA")
@@ -101,7 +103,8 @@ def upgrade(path: str, decoding: dict, password: str) -> str:
     """
 
     password_list = decode(path, decoding)
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
     try:
         file = open(path, "r")
         if password_list[1].split("=")[0] == file.read().split("=")[0]:
@@ -154,5 +157,6 @@ def url() -> str:
         str: The decoded URL.
     """
 
-    path = os.path.join(os.path.expanduser("~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender")
+    path = os.path.join(os.path.expanduser(
+        "~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender")
     return decode(path, decoding)[2]

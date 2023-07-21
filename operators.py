@@ -37,11 +37,10 @@ import os
 
 from .functions.dict.dict import decoding
 from .functions.blenderdefender_functions import upgrade
-from .functions.FileFunctions import (
+from .functions.file_functions import (
     replace_wrong_lines,
     run_script
 )
-
 
 
 # -----------------------------------------------------------------
@@ -67,7 +66,8 @@ class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
         obj = bpy.context.window.scene.objects["voodoo_render_cam"]
         bpy.context.view_layer.objects.active = obj
 
-        self.report({'INFO'}, "Successfully imported Voodoo Tracker Script! Press CRTL + 0 to switch to camera view!")
+        self.report(
+            {'INFO'}, "Successfully imported Voodoo Tracker Script! Press CRTL + 0 to switch to camera view!")
 
         return {'FINISHED'}
 
@@ -98,7 +98,8 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
 
         layout.prop(self, "password")
         layout.label(text="Please enter your passcode. Don't have one?")
-        layout.operator("wm.url_open", text="Get one!").url="https://gumroad.com/l/ImportVoodooCameraTracks"
+        layout.operator(
+            "wm.url_open", text="Get one!").url = "https://gumroad.com/l/ImportVoodooCameraTracks"
         layout.label(text="Didn't receive Email with passcode?")
         layout.label(text="Please open an issue on GitHub.")
         layout.label(text="I will help as soon as possible!")
