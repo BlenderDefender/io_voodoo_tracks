@@ -5,8 +5,14 @@
 
 # io_voodoo_tracks
 
-Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!
-If you want to know more [watch or read this tutorial.](https://defenderblender.artstation.com/pages/voodoo-tracker-is-outdated-but-heres-how-you-can-still-use-it-in-blender)
+Import Voodoo Camera Tracker Scripts (for Blender 2.5) to modern Blender versions (2.8 - 3.6) the easy way!
+I've uploaded a tutorial that shows you how to use the addon:
+
+[![Watch the video](https://img.youtube.com/vi/QUI_-upxhFw/maxresdefault.jpg)](https://youtube.com/watch?v=QUI_-upxhFw)
+
+---
+
+The following screenshot shows the location of the import button in the user interface:
 
 ![Open Headfile](https://github.com/BlenderDefender/io_voodoo_tracks/raw/main/Screenshots/screenshot_io_voodoo_tracks_new.png)
 
