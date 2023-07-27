@@ -80,7 +80,9 @@ class IOVOODOOTRACKS_APT_addon_preferences(AddonPreferences):
         mainrow = layout.row()
         # col = mainrow.column()
 
-        if check_free_donation_version() == "free":
+        donation_status = check_free_donation_version()
+
+        if donation_status == "free":
             layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
                             icon='FUND').url = "https://gumroad.com/blenderdefender"
             layout.label(
@@ -88,12 +90,12 @@ class IOVOODOOTRACKS_APT_addon_preferences(AddonPreferences):
             layout.label(
                 text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
             layout.operator("voodoo_track.upgrade")
-        elif check_free_donation_version() == "donation":
+        elif donation_status == "donation":
             layout.label(
                 text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='FUND')
             layout.operator(
                 "wm.url_open", text="Get discount code for cool Blender Products").url = url()
-        elif check_free_donation_version() == "database_file_corrupted":
+        elif donation_status == "database_file_corrupted":
             layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
                             icon='FUND').url = "https://gumroad.com/blenderdefender"
             layout.label(

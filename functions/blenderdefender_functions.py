@@ -46,8 +46,8 @@ def decode(path: str, decoding: dict) -> list:
     decoded = decoded.split(" ")
     if decoded[0] == "BlenderDefender":
         return decoded
-    else:
-        return "ERROR"
+
+    return "ERROR"
 
 
 def setup_addons_data(data: str) -> str:
@@ -67,11 +67,11 @@ def setup_addons_data(data: str) -> str:
 
     if "IO.db" in os.listdir(path):
         return path
-    else:
-        file = open(os.path.join(path, "IO.db"), "w+")
-        file.write(data)
-        file.close()
-        return path
+
+    file = open(os.path.join(path, "IO.db"), "w+")
+    file.write(data)
+    file.close()
+    return path
 
 
 def update_db() -> str:
@@ -107,17 +107,16 @@ def upgrade(path: str, decoding: dict, password: str) -> str:
         "~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
     try:
         file = open(path, "r")
-        if password_list[1].split("=")[0] == file.read().split("=")[0]:
-            if password in password_list:
-                file.close()
-                return update_db()
-            else:
-                file.close()
-                return "Password invalid. If you think this is a misstake, please report a bug."
-        else:
-            file.close()
+        file_content = file.read()
+        file.close
+
+        if password_list[1].split("=")[0] != file_content.split("=")[0]:
             return "Database file corrupted. Checkout issue #5 for help."
-        file.close()
+
+        if password in password_list:
+            return update_db()
+
+        return "Password invalid. If you think this is a mistake, please report a bug."
     except:
         return "Database file corrupted. Checkout issue #5 for help."
 
@@ -139,14 +138,16 @@ def check_free_donation_version() -> str:
     file = open(path, "r")
     content = file.read()
     content = content.split(" ")
-    if len(content) == 1:
-        file.close()
+    file.close()
+
+    content_length = len(content)
+    if content_length == 1:
         return "free"
-    elif len(content) == 2:
-        file.close()
+
+    if content_length == 2:
         return "donation"
-    elif len(content) > 2:
-        file.close()
+
+    if content_length > 2:
         return "database_file_corrupted"
 
 
