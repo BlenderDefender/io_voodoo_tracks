@@ -34,6 +34,7 @@ from bpy.types import (
 from bpy_extras.io_utils import ImportHelper
 
 import os
+from os import path as p
 
 from .functions.dict.dict import decoding
 from .functions.blenderdefender_functions import upgrade
@@ -82,10 +83,10 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
     def execute(self, context: 'Context'):
         """Upgrade to donation version"""
 
-        self.report({'INFO'}, upgrade(os.path.join(os.path.expanduser("~"),
-                                                   "Blender Addons Data",
-                                                   "io-voodoo-tracks",
-                                                   "data.blenderdefender"),
+        self.report({'INFO'}, upgrade(p.join(p.expanduser("~"),
+                                             "Blender Addons Data",
+                                             "io-voodoo-tracks",
+                                             "data.blenderdefender"),
                                       decoding,
                                       self.password))
         return {'FINISHED'}

@@ -21,7 +21,7 @@
 
 import bpy
 
-import os
+from os import path as p
 
 import subprocess
 
@@ -59,9 +59,9 @@ def run_script(python_script_filepath):
     subprocess.call([
         bpy.app.binary_path,
         '--background', '-noaudio',  # '-nojoystick',
-        # os.path.abspath(bpy.data.filepath), # the current .blend file
+        # p.abspath(bpy.data.filepath), # the current .blend file
         '--python',
-        os.path.abspath(python_script_filepath)
+        p.abspath(python_script_filepath)
     ])
 
     with open(python_script_filepath, 'r') as scriptfile:

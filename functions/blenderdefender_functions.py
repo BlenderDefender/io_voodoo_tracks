@@ -20,6 +20,7 @@
 # ##### END GPL LICENSE BLOCK #####
 
 import os
+from os import path as p
 
 from .dict.dict import decoding
 
@@ -60,15 +61,15 @@ def setup_addons_data(data: str) -> str:
         str: The path of the data directory.
     """
 
-    path = os.path.join(os.path.expanduser(
+    path = p.join(p.expanduser(
         "~"), "Blender Addons Data", "io-voodoo-tracks")
-    if not os.path.isdir(path):
+    if not p.isdir(path):
         os.makedirs(path)
 
     if "IO.db" in os.listdir(path):
         return path
 
-    file = open(os.path.join(path, "IO.db"), "w+")
+    file = open(p.join(path, "IO.db"), "w+")
     file.write(data)
     file.close()
     return path
@@ -81,7 +82,7 @@ def update_db() -> str:
         str: Status message, if the update was successful.
     """
 
-    path = os.path.join(os.path.expanduser(
+    path = p.join(p.expanduser(
         "~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
 
     file = open(path, "a")
@@ -103,7 +104,7 @@ def upgrade(path: str, decoding: dict, password: str) -> str:
     """
 
     password_list = decode(path, decoding)
-    path = os.path.join(os.path.expanduser(
+    path = p.join(p.expanduser(
         "~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
     try:
         file = open(path, "r")
@@ -128,12 +129,12 @@ def check_free_donation_version() -> str:
         str: Status in {"free", "donation", "database_file_corrupted"}
     """
 
-    data = decode(os.path.join(os.path.expanduser("~"),
-                               "Blender Addons Data",
-                               "io-voodoo-tracks",
-                               "data.blenderdefender"),
+    data = decode(p.join(p.expanduser("~"),
+                         "Blender Addons Data",
+                         "io-voodoo-tracks",
+                         "data.blenderdefender"),
                   decoding)
-    path = os.path.join(setup_addons_data(data[1]), "IO.db")
+    path = p.join(setup_addons_data(data[1]), "IO.db")
 
     file = open(path, "r")
     content = file.read()
@@ -158,6 +159,6 @@ def url() -> str:
         str: The decoded URL.
     """
 
-    path = os.path.join(os.path.expanduser(
+    path = p.join(p.expanduser(
         "~"), "Blender Addons Data", "io-voodoo-tracks", "data.blenderdefender")
     return decode(path, decoding)[2]

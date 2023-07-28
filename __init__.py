@@ -26,6 +26,7 @@ from bpy.types import (
 )
 
 import os
+from os import path as p
 
 import shutil
 
@@ -55,22 +56,22 @@ def menu_func(self, context: 'Context'):
 
 
 def register():
-    path = os.path.join(os.path.expanduser(
+    path = p.join(p.expanduser(
         "~"), "Blender Addons Data", "io-voodoo-tracks")
-    if not os.path.isdir(path):
+    if not p.isdir(path):
         os.makedirs(path)
-    shutil.copyfile(os.path.join(list(os.path.split(os.path.abspath(__file__)))[0],
-                                 "functions",
-                                 "data.blenderdefender"),
-                    os.path.join(os.path.expanduser("~"),
-                                 "Blender Addons Data",
-                                 "io-voodoo-tracks",
-                                 "data.blenderdefender"))
+    shutil.copyfile(p.join(list(p.split(p.abspath(__file__)))[0],
+                           "functions",
+                           "data.blenderdefender"),
+                    p.join(p.expanduser("~"),
+                           "Blender Addons Data",
+                           "io-voodoo-tracks",
+                           "data.blenderdefender"))
 
-    data = decode(os.path.join(os.path.expanduser("~"),
-                               "Blender Addons Data",
-                               "io-voodoo-tracks",
-                               "data.blenderdefender"),
+    data = decode(p.join(p.expanduser("~"),
+                         "Blender Addons Data",
+                         "io-voodoo-tracks",
+                         "data.blenderdefender"),
                   decoding)
     setup_addons_data(data[1])
 
