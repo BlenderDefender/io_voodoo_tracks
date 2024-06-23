@@ -2,7 +2,7 @@ schema_version = "1.0.0"
 
 id = "blenderdefender_io_voodoo_tracks"
 name = "Import Voodoo Camera Tracks"
-version = "1.0.7"
+version = "1.0.8"
 tagline = "Easily import old Voodoo Camera Tracker Scripts"
 # tagline = "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 4.2+ the easy way"
 maintainer = "Blender Defender"

@@ -39,7 +39,7 @@ from .functions.blenderdefender_functions import setup_addons_data, decode
 bl_info = {
     "name": "Import Voodoo Camera Tracks",
     "author": "Blender Defender",
-    "version": (1, 0, 7),
+    "version": (1, 0, 8),
     "blender": (2, 83, 0),
     "location": "File > Import > Open Voodo Camera Track (.py)",
     "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!",
