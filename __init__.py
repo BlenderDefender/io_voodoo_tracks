@@ -75,7 +75,10 @@ def register():
                   decoding)
     setup_addons_data(data[1])
 
-    prefs.register(bl_info)
+    if bpy.app.version < (4, 2):
+        prefs.register_legacy(bl_info)
+    else:
+        prefs.register()
     operators.register()
 
     bpy.types.TOPBAR_MT_file_import.append(menu_func)

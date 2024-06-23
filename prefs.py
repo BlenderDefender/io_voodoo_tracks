@@ -106,7 +106,8 @@ class IOVOODOOTRACKS_APT_addon_preferences(AddonPreferences):
                             text="Upgrade to donation version.")
 
         # could also pass in col as third arg
-        addon_updater_ops.update_settings_ui(self, context)
+        if bpy.app.version < (4, 2):
+            addon_updater_ops.update_settings_ui(self, context)
 
         # Alternate draw function, which is more condensed and can be
         # placed within an existing draw function. Only contains:
@@ -125,7 +126,7 @@ classes = (
 )
 
 
-def register(bl_info):
+def register_legacy(bl_info):
     # addon updater code and configurations
     # in case of broken version, try to register the updater first
     # so that users can revert back to a working version
@@ -135,6 +136,11 @@ def register(bl_info):
     for cls in classes:
         addon_updater_ops.make_annotations(
             cls)  # to avoid blender 2.8 warnings
+        bpy.utils.register_class(cls)
+
+
+def register():
+    for cls in classes:
         bpy.utils.register_class(cls)
 
 

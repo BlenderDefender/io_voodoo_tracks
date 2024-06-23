@@ -1,0 +1,24 @@
+schema_version = "1.0.0"
+
+id = "blenderdefender_io_voodoo_tracks"
+name = "Import Voodoo Camera Tracks"
+version = "1.0.7"
+tagline = "Easily import old Voodoo Camera Tracker Scripts"
+# tagline = "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 4.2+ the easy way"
+maintainer = "Blender Defender"
+website = "https://github.com/BlenderDefender/io_voodoo_tracks/issues"
+
+type = "add-on"
+blender_version_min = "4.2.0"
+license = ["SPDX:GPL-3.0-or-later"]
+
+[build]
+paths_exclude_pattern = [
+    "/.git/",
+    "/.github/",
+    "/.vscode/",
+    ".gitignore",
+    "*_updater/",
+    "__pycache__/",
+    "Screenshots",
+]
