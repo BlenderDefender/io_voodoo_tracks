@@ -20,5 +20,5 @@ paths_exclude_pattern = [
     ".gitignore",
     "*_updater/",
     "__pycache__/",
-    "Screenshots",
+    "screenshots",
 ]

@@ -14,7 +14,7 @@ I've uploaded a tutorial that shows you how to use the addon:
 
 The following screenshot shows the location of the import button in the user interface:
 
-![Open Headfile](https://github.com/BlenderDefender/io_voodoo_tracks/raw/main/Screenshots/screenshot_io_voodoo_tracks_new.png)
+![Open Headfile](https://github.com/BlenderDefender/io_voodoo_tracks/raw/main/screenshots/screenshot_io_voodoo_tracks_new.png)
 
 ## System requirements:
 
