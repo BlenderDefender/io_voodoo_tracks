@@ -33,8 +33,7 @@ import shutil
 from . import operators
 from . import prefs
 
-from .functions.dict.dict import decoding
-from .functions.blenderdefender_functions import setup_addons_data, decode
+from .functions.blenderdefender_functions import setup_addons_data
 
 bl_info = {
     "name": "Import Voodoo Camera Tracks",
@@ -60,6 +59,7 @@ def register():
         "~"), "Blender Addons Data", "io-voodoo-tracks")
     if not p.isdir(path):
         os.makedirs(path)
+
     shutil.copyfile(p.join(list(p.split(p.abspath(__file__)))[0],
                            "functions",
                            "data.blenderdefender"),
@@ -68,12 +68,7 @@ def register():
                            "io-voodoo-tracks",
                            "data.blenderdefender"))
 
-    data = decode(p.join(p.expanduser("~"),
-                         "Blender Addons Data",
-                         "io-voodoo-tracks",
-                         "data.blenderdefender"),
-                  decoding)
-    setup_addons_data(data[1])
+    setup_addons_data()
 
     if bpy.app.version < (4, 2):
         prefs.register_legacy(bl_info)

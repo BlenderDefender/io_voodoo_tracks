@@ -33,10 +33,8 @@ from bpy.types import (
 )
 from bpy_extras.io_utils import ImportHelper
 
-import os
 from os import path as p
 
-from .functions.dict.dict import decoding
 from .functions.blenderdefender_functions import upgrade
 from .functions.file_functions import (
     replace_wrong_lines,
@@ -87,7 +85,6 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
                                              "Blender Addons Data",
                                              "io-voodoo-tracks",
                                              "data.blenderdefender"),
-                                      decoding,
                                       self.password))
         return {'FINISHED'}
 
