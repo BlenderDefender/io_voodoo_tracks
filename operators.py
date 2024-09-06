@@ -36,10 +36,6 @@ from bpy_extras.io_utils import ImportHelper
 from os import path as p
 
 from .functions.blenderdefender_functions import upgrade
-from .functions.file_functions import (
-    replace_wrong_lines,
-    run_script
-)
 
 
 # -----------------------------------------------------------------
@@ -55,13 +51,27 @@ class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
     def execute(self, context: 'Context'):
         """Convert the selected file from 2.5 to 2.8"""
 
-        # ------call the File Browser-----------
-        #   bpy.ops.text.open(filepath=self.filepath)
-        filepath = self.filepath
-        replace_wrong_lines(filepath)
-        run_script(filepath)
+        replace_texts = {
+            "scene.objects.link(dummy)": "bpy.context.collection.objects.link(dummy)",
+            "data.lens_unit = 'DEGREES'": "",
+            "data.dof_distance = 0.0": "",
+            "data.draw_size = 0.5": "",
+            "scene.objects.link(mesh)": "bpy.context.collection.objects.link(mesh)",
+            "scene.objects.link(vcam)": "bpy.context.collection.objects.link(vcam)"
+        }
 
-        # ------make Camera active--------------
+        with open(self.filepath, "r", encoding="utf-8") as f:
+            voodoo_script = f.read()
+
+        for source, new in replace_texts.items():
+            voodoo_script = voodoo_script.replace(source, new)
+
+        with open(self.filepath, "w+", encoding="utf-8") as f:
+            f.write(voodoo_script)
+
+        exec(voodoo_script)
+
+        # ------ make Camera active --------------
         obj = context.window.scene.objects["voodoo_render_cam"]
         context.view_layer.objects.active = obj
 
