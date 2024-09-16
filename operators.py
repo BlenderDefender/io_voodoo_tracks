@@ -105,10 +105,10 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
         layout: 'UILayout' = self.layout
 
         layout.prop(self, "password")
-        layout.label(text="Please enter your passcode. Don't have one?")
+        layout.label(text="Please enter the password that you have received. Don't have one?")
         layout.operator(
-            "wm.url_open", text="Get one!").url = "https://gumroad.com/l/ImportVoodooCameraTracks"
-        layout.label(text="Didn't receive Email with passcode?")
+            "wm.url_open", text="Get one!").url = "https://go.blenderdefender.com/io-voodoo-tracks"
+        layout.label(text="Didn't receive Email with password?")
         layout.label(text="Please open an issue on GitHub.")
         layout.label(text="I will help as soon as possible!")
 
