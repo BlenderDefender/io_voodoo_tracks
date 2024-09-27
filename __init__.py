@@ -33,7 +33,6 @@ import shutil
 from . import operators
 from . import prefs
 
-from .functions.blenderdefender_functions import setup_addons_data
 
 bl_info = {
     "name": "Import Voodoo Camera Tracks",
@@ -49,14 +48,16 @@ bl_info = {
     "category": "Import-Export"}
 
 
-def menu_func(self, context: 'Context'):
-    layout: 'UILayout' = self.layout
-    layout.operator("voodoo_track.import", icon='CON_CAMERASOLVER')
+def setup_addons_data() -> str:
+    """Setup the data required for IO Voodoo Tracks.
 
+    Returns:
+        str: The path of the data directory.
+    """
 
-def register():
     path = p.join(p.expanduser(
         "~"), "Blender Addons Data", "io-voodoo-tracks")
+
     if not p.isdir(path):
         os.makedirs(path)
 
@@ -67,6 +68,14 @@ def register():
                            "Blender Addons Data",
                            "io-voodoo-tracks",
                            "data.blenderdefender"))
+
+
+def menu_func(self, context: 'Context'):
+    layout: 'UILayout' = self.layout
+    layout.operator("voodoo_track.import", icon='CON_CAMERASOLVER')
+
+
+def register():
 
     setup_addons_data()
 

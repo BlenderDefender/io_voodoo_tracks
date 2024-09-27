@@ -19,7 +19,6 @@
 #
 # ##### END GPL LICENSE BLOCK #####
 
-import os
 from os import path as p
 
 
@@ -45,21 +44,6 @@ def decrypt(path: str, password: str) -> list:
         return decoded
 
     return "ERROR"
-
-
-def setup_addons_data() -> str:
-    """Setup the data required for IO Voodoo Tracks.
-
-    Returns:
-        str: The path of the data directory.
-    """
-
-    path = p.join(p.expanduser(
-        "~"), "Blender Addons Data", "io-voodoo-tracks")
-    if not p.isdir(path):
-        os.makedirs(path)
-
-    return path
 
 
 def upgrade(path: str, password: str) -> str:
