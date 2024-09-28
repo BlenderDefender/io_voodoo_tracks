@@ -91,11 +91,7 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
     def execute(self, context: 'Context'):
         """Upgrade to donation version"""
 
-        self.report({'INFO'}, upgrade(p.join(p.expanduser("~"),
-                                             "Blender Addons Data",
-                                             "io-voodoo-tracks",
-                                             "data.blenderdefender"),
-                                      self.password))
+        self.report({'INFO'}, upgrade(self.password))
         return {'FINISHED'}
 
     def invoke(self, context: 'Context', event: 'Event'):
@@ -105,7 +101,8 @@ class IOVOODOOTRACKS_OT_upgrade(Operator):
         layout: 'UILayout' = self.layout
 
         layout.prop(self, "password")
-        layout.label(text="Please enter the password that you have received. Don't have one?")
+        layout.label(
+            text="Please enter the password that you have received. Don't have one?")
         layout.operator(
             "wm.url_open", text="Get one!").url = "https://go.blenderdefender.com/io-voodoo-tracks"
         layout.label(text="Didn't receive Email with password?")

@@ -21,20 +21,22 @@
 
 from os import path as p
 
+ADDON_DATA_DIR = p.join(p.expanduser(
+    "~"), "Blender Addons Data", "io-voodoo-tracks")
 
-def decrypt(path: str, password: str) -> list:
-    """Decode a file that holds data required for the donation system.
+
+def decrypt(password: str) -> list:
+    """Decode the file that holds the data required for the donation system.
 
     Args:
-        path (str): The path to the file
-        passwort (str): The password for decrypting the file
+        password (str): The password for decrypting the file
 
     Returns:
-        list: A list of decoded strings.
+        list: A list of decrypted strings.
     """
 
     try:
-        with open(path, "rb") as f:
+        with open(p.join(ADDON_DATA_DIR, "data.blenderdefender"), "rb") as f:
             decoded = one_time_pad(f.read(), password).decode()
     except UnicodeDecodeError:
         return "ERROR"
@@ -46,7 +48,7 @@ def decrypt(path: str, password: str) -> list:
     return "ERROR"
 
 
-def upgrade(path: str, password: str) -> str:
+def upgrade(password: str) -> str:
     """Function for upgrading to the donator version.
 
     Args:
@@ -57,15 +59,12 @@ def upgrade(path: str, password: str) -> str:
         str: Status, whether the upgrade was successful.
     """
 
-    data = decrypt(path, password)
+    data = decrypt(password)
 
     if data == "ERROR":
         return "Invalid password. If you think this is a mistake, please report a bug."
 
-    path = p.join(p.expanduser(
-        "~"), "Blender Addons Data", "io-voodoo-tracks", "IO.db")
-
-    with open(path, "w+", encoding="utf-8") as f:
+    with open(p.join(ADDON_DATA_DIR, "IO.db"), "w+", encoding="utf-8") as f:
         f.write(password)
 
     return "Upgrade successfull!"
@@ -77,13 +76,10 @@ def check_free_donation_version() -> str:
     Returns:
         str: Status in {"free", "donation"}
     """
-    data_dir = p.join(p.expanduser(
-        "~"), "Blender Addons Data", "io-voodoo-tracks")
-
-    with open(p.join(data_dir, "IO.db"), "r") as f:
+    with open(p.join(ADDON_DATA_DIR, "IO.db"), "r") as f:
         password: str = f.read()
 
-    data = decrypt(p.join(data_dir, "data.blenderdefender"), password)
+    data = decrypt(password)
 
     if data == "ERROR":
         return "free"
@@ -97,13 +93,11 @@ def url() -> str:
     Returns:
         str: The decoded URL.
     """
-    data_dir = p.join(p.expanduser(
-        "~"), "Blender Addons Data", "io-voodoo-tracks")
 
-    with open(p.join(data_dir, "IO.db"), "r") as f:
+    with open(p.join(ADDON_DATA_DIR, "IO.db"), "r") as f:
         password: str = f.read()
 
-    return decrypt(p.join(data_dir, "data.blenderdefender"), password)[1]
+    return decrypt(password)[1]
 
 
 def one_time_pad(input: bytes, password: str):
