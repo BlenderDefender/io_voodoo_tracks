@@ -76,13 +76,14 @@ class IOVOODOOTRACKS_APT_addon_preferences(AddonPreferences):
 
     def draw(self, context: 'Context'):
         layout: 'UILayout' = self.layout
-        # col = layout.column() # works best if a column, or even just self.layout
-        mainrow = layout.row()
-        # col = mainrow.column()
-
         donation_status = check_free_donation_version()
 
-        if donation_status == "free":
+        if donation_status == "donation":
+            layout.label(
+                text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='FUND')
+            layout.operator(
+                "wm.url_open", text="Get discount code for cool Blender Products").url = url()
+        else:
             layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
                             icon='FUND').url = "https://gumroad.com/blenderdefender"
             layout.label(
@@ -90,35 +91,9 @@ class IOVOODOOTRACKS_APT_addon_preferences(AddonPreferences):
             layout.label(
                 text="If you want to support me and get cool discount codes, please upgrade to donation version. :)")
             layout.operator("voodoo_track.upgrade")
-        elif donation_status == "donation":
-            layout.label(
-                text="IO Voodoo Tracks - You are using the donation version. Thank you :)", icon='FUND')
-            layout.operator(
-                "wm.url_open", text="Get discount code for cool Blender Products").url = url()
-        elif donation_status == "database_file_corrupted":
-            layout.operator("wm.url_open", text="Checkout Gumroad for other addons and more...",
-                            icon='FUND').url = "https://gumroad.com/blenderdefender"
-            layout.label(
-                text="IO Voodoo Tracks - Databasefile corrupted! Please delete it.")
-            layout.label(
-                text="And please, stop messing around with .db files. Thanks :)")
-            layout.operator("voodoo_track.upgrade",
-                            text="Upgrade to donation version.")
 
-        # could also pass in col as third arg
         if bpy.app.version < (4, 2):
             addon_updater_ops.update_settings_ui(self, context)
-
-        # Alternate draw function, which is more condensed and can be
-        # placed within an existing draw function. Only contains:
-        #   1) check for update/update now buttons
-        #   2) toggle for auto-check (interval will be equal to what is set above)
-        # addon_updater_ops.update_settings_ui_condensed(self, context, col)
-
-        # Adding another column to help show the above condensed ui as one column
-        # col = mainrow.column()
-        # col.scale_y = 2
-        # col.operator("wm.url_open","Open webpage ").url=addon_updater_ops.updater.website
 
 
 classes = (
@@ -145,8 +120,8 @@ def register():
 
 
 def unregister():
-    # addon updater unregister
-    addon_updater_ops.unregister()
+    if bpy.app.version < (4, 2):
+        addon_updater_ops.unregister()
 
     # register the example panel, to show updater buttons
     for cls in reversed(classes):
