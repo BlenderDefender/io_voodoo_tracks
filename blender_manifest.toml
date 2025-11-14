@@ -14,11 +14,8 @@ license = ["SPDX:GPL-3.0-or-later"]
 
 [build]
 paths_exclude_pattern = [
-    "/.git/",
-    "/.github/",
-    "/.vscode/",
-    ".gitignore",
+    ".*",
     "*_updater/",
     "__pycache__/",
-    "screenshots",
+    "screenshot*",
 ]
