@@ -46,7 +46,7 @@ from .functions.blenderdefender_functions import upgrade
 class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
     """Import Voodoo Camera Tracker Script (for Blender 2.5, will be automaticly converted)"""
     bl_idname = "voodoo_track.import"
-    bl_label = "Open Voodo Camera Track (.py)"
+    bl_label = "Vodoo Camera Track (.py)"
 
     def execute(self, context: 'Context'):
         """Convert the selected file from 2.5 to 2.8"""
