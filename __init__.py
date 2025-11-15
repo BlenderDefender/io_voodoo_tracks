@@ -25,49 +25,8 @@ from bpy.types import (
     UILayout
 )
 
-import os
-from os import path as p
-
-import shutil
 
 from . import operators
-from . import prefs
-
-
-bl_info = {
-    "name": "Import Voodoo Camera Tracks",
-    "author": "Blender Defender",
-    "version": (1, 0, 8),
-    "blender": (2, 83, 0),
-    "location": "File > Import > Vodoo Camera Track (.py)",
-    "description": "Import Voodoo Camera Tracker Scripts (for Blender 2.5) to Blender 2.8x the easy way!",
-    "warning": "Checkout Gumroad for other Addons and more...",
-    "doc_url": "https://github.com/BlenderDefender/io_voodoo_tracks",
-    "tracker_url": "https://github.com/BlenderDefender/io_voodoo_tracks/issues",
-    "endpoint_url": "https://raw.githubusercontent.com/BlenderDefender/BlenderDefender/updater_endpoints/IOVOODOOTRACKS.json",
-    "category": "Import-Export"}
-
-
-def setup_addons_data() -> str:
-    """Setup the data required for IO Voodoo Tracks.
-
-    Returns:
-        str: The path of the data directory.
-    """
-
-    path = p.join(p.expanduser(
-        "~"), "Blender Addons Data", "io-voodoo-tracks")
-
-    if not p.isdir(path):
-        os.makedirs(path)
-
-    shutil.copyfile(p.join(list(p.split(p.abspath(__file__)))[0],
-                           "functions",
-                           "data.blenderdefender"),
-                    p.join(p.expanduser("~"),
-                           "Blender Addons Data",
-                           "io-voodoo-tracks",
-                           "data.blenderdefender"))
 
 
 def menu_func(self, context: 'Context'):
@@ -76,19 +35,11 @@ def menu_func(self, context: 'Context'):
 
 
 def register():
-
-    setup_addons_data()
-
-    if bpy.app.version < (4, 2):
-        prefs.register_legacy(bl_info)
-    else:
-        prefs.register()
     operators.register()
 
     bpy.types.TOPBAR_MT_file_import.append(menu_func)
 
 
 def unregister():
-    prefs.unregister()
     operators.unregister()
     bpy.types.TOPBAR_MT_file_import.remove(menu_func)

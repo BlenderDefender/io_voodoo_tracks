@@ -22,20 +22,11 @@
 
 import bpy
 
-from bpy.props import (
-    StringProperty
-)
 from bpy.types import (
     Context,
-    Event,
-    Operator,
-    UILayout
+    Operator
 )
 from bpy_extras.io_utils import ImportHelper
-
-from os import path as p
-
-from .functions.blenderdefender_functions import upgrade
 
 
 # -----------------------------------------------------------------
@@ -81,38 +72,8 @@ class IOVOODOOTRACKS_OT_import_voodoo_track(Operator, ImportHelper):
         return {'FINISHED'}
 
 
-class IOVOODOOTRACKS_OT_upgrade(Operator):
-    """Upgrade from free to donation version"""
-    bl_idname = "voodoo_track.upgrade"
-    bl_label = "Upgrade!"
-
-    password: StringProperty(name="")
-
-    def execute(self, context: 'Context'):
-        """Upgrade to donation version"""
-
-        self.report({'INFO'}, upgrade(self.password))
-        return {'FINISHED'}
-
-    def invoke(self, context: 'Context', event: 'Event'):
-        return context.window_manager.invoke_props_dialog(self)
-
-    def draw(self, context: 'Context'):
-        layout: 'UILayout' = self.layout
-
-        layout.prop(self, "password")
-        layout.label(
-            text="Please enter the password that you have received. Don't have one?")
-        layout.operator(
-            "wm.url_open", text="Get one!").url = "https://go.blenderdefender.com/io-voodoo-tracks"
-        layout.label(text="Didn't receive Email with password?")
-        layout.label(text="Please open an issue on GitHub.")
-        layout.label(text="I will help as soon as possible!")
-
-
 classes = (
     IOVOODOOTRACKS_OT_import_voodoo_track,
-    IOVOODOOTRACKS_OT_upgrade
 )
 
 
