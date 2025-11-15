@@ -13,9 +13,4 @@ blender_version_min = "4.2.0"
 license = ["SPDX:GPL-3.0-or-later"]
 
 [build]
-paths_exclude_pattern = [
-    ".*",
-    "*_updater/",
-    "__pycache__/",
-    "screenshot*",
-]
+paths_exclude_pattern = [".*", "*_updater/", "*.pyc", "screenshot*"]
